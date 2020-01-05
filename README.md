@@ -4,7 +4,7 @@ Virtual Reality experience based on WebVR, works best with a VR headset like Ocu
 
 ### Instructions
 
-1. Use the headset browser to visit the site
+1. Use the headset browser to visit the site - https://spiderman.webvr.link
 2. Click on the "VR" button on the bottom right to enter VR mode
 3. Enjoy
 
