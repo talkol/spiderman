@@ -59,10 +59,10 @@ AFRAME.registerComponent("player", {
     this.el.appendChild(this.leftHand);
 
     // sounds
-    this.rightHand.setAttribute("sound__shoot_web", "src: #sound-shoot-web; volume: 2; rolloffFactor: 5;");
-    this.leftHand.setAttribute("sound__shoot_web", "src: #sound-shoot-web; volume: 2; rolloffFactor: 5;");
-    this.rightHand.setAttribute("sound__no_web", "src: #sound-no-web; volume: 1; rolloffFactor: 5;");
-    this.leftHand.setAttribute("sound__no_web", "src: #sound-no-web; volume: 1; rolloffFactor: 5;");
+    this.rightHand.setAttribute("sound__shoot_web", "src: #sound-shoot-web; volume: 1; positional: false;");
+    this.leftHand.setAttribute("sound__shoot_web", "src: #sound-shoot-web; volume: 1; positional: false;");
+    this.rightHand.setAttribute("sound__no_web", "src: #sound-no-web; volume: 0.5; positional: false;");
+    this.leftHand.setAttribute("sound__no_web", "src: #sound-no-web; volume: 0.5; positional: false;");
     this.el.setAttribute("sound__hit_wall", "src: #sound-hit-wall; positional: false;");
     this.el.setAttribute("sound__hit_ground", "src: #sound-hit-ground; positional: false;");
 
