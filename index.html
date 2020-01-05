@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Spider-Man VR Experience</title>
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="hand.js"></script>
+    <script src="tile.js"></script>
+    <script src="map.js"></script>
+    <script src="player.js"></script>
+    <script src="web.js"></script>
+    <script src="gradient.js"></script>
+    <script src="radio.js"></script>
+  </head>
+
+  <body style="position: relative;">
+    <a-scene
+      renderer="highRefreshRate: false; colorManagement: true;"
+      fog="type: linear; color: #eafaff; far: 500;"
+      background="color: #eafaff;"
+    >
+      <a-sky
+        id="sky"
+        theta-length="110"
+        radius="1000"
+        material="topColor: #87ceeb; bottomColor: #eafaff; shader: gradientshader; fog: false;"
+      ></a-sky>
+
+      <a-assets>
+        <img
+          id="style1-building1-texture"
+          src="assets/s1b1.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building2-texture"
+          src="assets/s1b2.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building3-texture"
+          src="assets/s1b3.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building4-texture"
+          src="assets/s1b4.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building5-texture"
+          src="assets/s1b5.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building6-texture"
+          src="assets/s1b6.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building7-texture"
+          src="assets/s1b7.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building8-texture"
+          src="assets/s1b8.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building9-texture"
+          src="assets/s1b9.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building10-texture"
+          src="assets/s1b10.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-building11-texture"
+          src="assets/s1b11.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-ground1-texture"
+          src="assets/s1g1.jpg"
+          preload="auto"
+        />
+        <img
+          id="style1-road1-texture"
+          src="assets/s1r1.jpg"
+          preload="auto"
+        />
+        <a-mixin
+          id="tile"
+          tile="
+            buildingTextures: #style1-building1-texture, #style1-building2-texture, #style1-building3-texture, #style1-building4-texture, #style1-building5-texture, #style1-building6-texture, #style1-building7-texture, #style1-building8-texture, #style1-building9-texture, #style1-building10-texture, #style1-building11-texture;
+            buildingColors: #9eafcb, #a6bee4, #cca49a, #818c9f, #9aaec6, #484a57, #c7afa3, #7b9fbf, #123459, #a3b3cd, #c5a495;
+            groundTextures: #style1-ground1-texture;
+            groundColors: #9aaacc;
+            roadTextures: #style1-road1-texture;
+            roadColors: #373943;"
+        ></a-mixin>
+        <a-asset-item
+          id="crystal"
+          src="assets/crystal-small.glb"
+          preload="auto"
+        ></a-asset-item>
+        <audio
+          id="sound-shoot-web"
+          src="assets/shoot-web.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="sound-no-web"
+          src="assets/no-web.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="sound-hit-wall"
+          src="assets/hit-wall.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="sound-hit-ground"
+          src="assets/hit-ground.mp3"
+          preload="auto"
+        ></audio>
+        <audio
+          id="sound-hit-crystal"
+          src="assets/hit-crystal.mp3"
+        ></audio>
+        <audio
+          id="sound-crystal"
+          src="assets/crystal.mp3"
+        ></audio>
+      </a-assets>
+
+      <a-entity light="type:ambient; color:#e8e8e8"></a-entity>
+      <a-entity light="type: directional; color: #FFF; intensity: 0.6;" position="-0.5 1 1"></a-entity>
+
+      <a-entity id="map" map="" pool="mixin: tile; size: 50; container: #map; dynamic: true;"></a-entity>
+
+      <a-entity player="mass: 70" position="0 0 0"></a-entity>
+
+      <a-entity id="web-right" web="" position="0 0 0"></a-entity>
+      <a-entity id="web-left" web="" position="0 0 0"></a-entity>
+
+      <a-entity
+        radio="tracks: 516082875, 495963048, 564400320, 520701015, 503039229, 283366526, 27657719, 4476253; weights: 50, 50, 50, 50, 50, 50, 30, 20;"
+      ></a-entity>
+    </a-scene>
+
+    <div
+      style="z-index: 1; position: absolute;
+             top: 10%; left: 5%; bottom: 10%; right: 5%; 
+             padding: 1% 20% 1% 5%;
+             font-family: sans-serif,monospace; font-size: 20px; font-weight: 300;
+             background-repeat: no-repeat; background-color: #a40000; background-position-x: right; background-size: contain;
+             background-image: url(assets/background.png);"
+    >
+      <p><span style="color: white;">Movement:</span> Hold the triggers to shoot webs and zip through the city.</p>
+      <p><span style="color: white;">Challenge:</span> How many crystals can you collect without hitting walls?</p>
+      <p>
+        <span style="color: white;">Advanced:</span> Hold thumbstick up/down before shooting to control length. Hold
+        grip button for sharper turns.
+      </p>
+      <p style="color: white;">Click the VR button on the bottom right to start! VR headset required.</p>
+      <p style="font-size: 12px;">Unofficial, fan-made and open source - <a href="https://github.com/talkol/spiderman">https://github.com/talkol/spiderman</a></p>
+    </div>
+  </body>
+</html>
