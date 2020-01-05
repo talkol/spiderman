@@ -90,11 +90,11 @@ AFRAME.registerComponent("web", {
     this.handLocalPosition.add(rigLocalPosition);
     this.handLocalPosition.sub(this.el.object3D.position);
     if (offsetCamera == "right") {
-      this.shooterLocalPosition.set(-0.02, 0.01, 0.07);
+      this.shooterLocalPosition.set(-0.007, 0.021, 0.07);
       this.shooterLocalPosition.applyQuaternion(hand.object3D.quaternion);
       this.handLocalPosition.add(this.shooterLocalPosition);
     } else if (offsetCamera == "left") {
-      this.shooterLocalPosition.set(0.005, 0, 0.075);
+      this.shooterLocalPosition.set(0.0035, 0.0035, 0.075);
       this.shooterLocalPosition.applyQuaternion(hand.object3D.quaternion);
       this.handLocalPosition.add(this.shooterLocalPosition);
     } else if (offsetCamera == "camera") {

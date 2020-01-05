@@ -53,8 +53,8 @@ AFRAME.registerComponent("player", {
     });
     this.score = document.createElement("a-entity");
     this.score.setAttribute("text", "value: 0; color: #0397ac; align: center; width: 0.9;");
-    this.score.setAttribute("position", "-0.02 0.05 0.1");
-    this.score.setAttribute("rotation", "-120 80 -90");
+    this.score.setAttribute("position", "-0.05 0.01 0.11");
+    this.score.setAttribute("rotation", "-165 80 -90");
     this.leftHand.appendChild(this.score);
     this.el.appendChild(this.leftHand);
 

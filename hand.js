@@ -230,7 +230,7 @@ AFRAME.registerComponent("hand", {
         self.clips = gltf.animations;
         el.setObject3D("mesh", mesh);
         mesh.position.set(0, 0, 0);
-        mesh.rotation.set(0, 0, 0);
+        mesh.rotation.set(0, 0, hand === "left" ? 45 : -45);
         el.setAttribute("vive-controls", controlConfiguration);
         el.setAttribute("oculus-touch-controls", controlConfiguration);
         el.setAttribute("windows-motion-controls", controlConfiguration);
