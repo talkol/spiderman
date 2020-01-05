@@ -4,7 +4,7 @@ AFRAME.registerComponent("web", {
     strength: { type: "number", default: 100 },
     lengthFactor: { type: "number", default: 0.4 },
     lengthFactorMaxBoost: { type: "number", default: 0.2 },
-    maxLength: { type: "number", default: 150 }, // m
+    maxLength: { type: "number", default: 250 }, // m
     shootingVelocity: { type: "number", default: 200 }, // m / s
     reduceWallDirForce: { type: "number", default: 0.5 }
   },
