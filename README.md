@@ -2,7 +2,7 @@
 
 Virtual Reality experience based on WebVR, works best with a VR headset like Oculus Quest.
 
-### Intructions
+### Instructions
 
 1. Use the headset browser to visit the site
 2. Click on the "VR" button on the bottom right to enter VR mode
