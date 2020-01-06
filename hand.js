@@ -1,3 +1,7 @@
+// This file is largely from A-Frame (https://github.com/aframevr/aframe)
+// Copyright © 2015-2017 A-Frame authors.
+// Licensed MIT, see https://github.com/aframevr/aframe/blob/master/LICENSE
+
 var MODEL_URLS = {
   left: "assets/leftHand.glb",
   right: "assets/rightHand.glb"
