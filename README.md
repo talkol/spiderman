@@ -2,6 +2,8 @@
 
 Virtual Reality experience based on WebVR, works best with a VR headset like Oculus Quest.
 
+<img src="assets/preview.gif">
+
 ### Instructions
 
 1. Use the headset browser to visit the site - https://spiderman.webvr.link
