@@ -7,7 +7,7 @@ AFRAME.registerComponent("radio", {
   init: function() {
     try {
       if (typeof SC !== "undefined") {
-        SC.client_id = "b1275b704badf79d972d51aa4b92ea15";
+        SC.client_id = "9fac4561902d4ea62413392ed74aa2b0";
         SC.initialize({
           client_id: SC.client_id
         });
