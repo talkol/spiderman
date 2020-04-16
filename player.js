@@ -150,6 +150,10 @@ AFRAME.registerComponent("player", {
   },
 
   tick: function(time, timeDelta) {
+    if (!this.camera.getAttribute("camera").active) {
+      this.camera.setAttribute("camera", { active: true });
+    }
+    
     let timeDeltaSec = Math.min(timeDelta / 1000, 1);
     let rigLocalPosition = this.el.object3D.position;
     let velocityRaycaster = this.el.components.raycaster;
