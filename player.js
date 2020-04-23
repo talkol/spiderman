@@ -128,6 +128,10 @@ AFRAME.registerComponent("player", {
     this.rightWeb = document.getElementById("web-right");
     this.leftWeb = document.getElementById("web-left");
     this.map = document.getElementById("map");
+    
+    if (!this.camera.getAttribute("camera").active) {
+      this.camera.setAttribute("camera", { active: true });
+    }    
   },
 
   playWebSound: function(type, hand) {
@@ -149,7 +153,7 @@ AFRAME.registerComponent("player", {
     this.score.setAttribute("text", `value: ${this.scoreValue}`);
   },
 
-  tick: function(time, timeDelta) {
+  tick: function(time, timeDelta) {    
     let timeDeltaSec = Math.min(timeDelta / 1000, 1);
     let rigLocalPosition = this.el.object3D.position;
     let velocityRaycaster = this.el.components.raycaster;
