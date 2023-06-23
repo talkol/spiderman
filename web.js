@@ -149,7 +149,7 @@ AFRAME.registerComponent("web", {
     }
   }
 });
-
+/*
 AFRAME.components['vr-mode-ui'].Component.prototype.toggleEnterARButtonIfNeeded = function () {
   if (AFRAME.utils.device.checkVRSupport()) {
     if (this.enterAREl.parentNode) {
@@ -159,3 +159,4 @@ AFRAME.components['vr-mode-ui'].Component.prototype.toggleEnterARButtonIfNeeded 
   }
   c.toggleEnterARButtonIfNeeded();
 };
+*/
