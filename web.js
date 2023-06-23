@@ -149,3 +149,13 @@ AFRAME.registerComponent("web", {
     }
   }
 });
+
+AFRAME.components['vr-mode-ui'].Component.prototype.toggleEnterARButtonIfNeeded = function () {
+  if (AFRAME.utils.device.checkVRSupport()) {
+    if (this.enterAREl.parentNode) {
+      this.enterAREl.parentNode.removeChild(this.enterAREl);
+    }
+    return;
+  }
+  c.toggleEnterARButtonIfNeeded();
+};
