@@ -39,7 +39,8 @@ AFRAME.registerComponent("tile", {
     plane.setAttribute("material", {
       src: this.data.roadTextures[0],
       repeat: { x: 60, y: 60 },
-      shader: "flat"
+      shader: "flat",
+      depthWrite: false
     });
     this.el.appendChild(plane);
 
@@ -51,30 +52,72 @@ AFRAME.registerComponent("tile", {
     plane.setAttribute("height", this.data.sidewalkHeight);
     plane.setAttribute("material", {
       src: this.data.groundTextures[0],
-      repeat: { x: 44, y: 55 }
+      repeat: { x: 44, y: 55 },
+      depthWrite: false
     });
     this.el.appendChild(plane);
   },
 
   addBuilding: function(width, depth, height, x, z) {
     let texture = this.nextRandElement(this.data.buildingTextures);
-    let box = document.createElement("a-box");
-    box.setAttribute("position", { x: x, y: height / 2, z: z });
-    box.setAttribute("width", width);
-    box.setAttribute("depth", depth);
-    box.setAttribute("height", height);
-    box.setAttribute("class", "collidable");
-    box.setAttribute("material", {
+    let side = document.createElement("a-plane");
+    side.setAttribute("position", { x: x, y: height / 2, z: z + depth / 2 });
+    side.setAttribute("width", width);
+    side.setAttribute("height", height);
+    side.setAttribute("class", "collidable");
+    side.setAttribute("part", "wall");
+    side.setAttribute("material", {
       src: this.data.buildingTextures[texture],
       repeat: { x: width / 10, y: height / 10 }
     });
-    this.el.appendChild(box);
+    this.el.appendChild(side);
+
+    side = document.createElement("a-plane");
+    side.setAttribute("position", { x: x, y: height / 2, z: z - depth / 2 });
+    side.setAttribute("width", width);
+    side.setAttribute("height", height);
+    side.setAttribute("rotation", { x: 0, y: -180, z: 0 });
+    side.setAttribute("class", "collidable");
+    side.setAttribute("part", "wall");
+    side.setAttribute("material", {
+      src: this.data.buildingTextures[texture],
+      repeat: { x: width / 10, y: height / 10 }
+    });
+    this.el.appendChild(side);
+
+    side = document.createElement("a-plane");
+    side.setAttribute("position", { x: x - depth / 2, y: height / 2, z: z });
+    side.setAttribute("width", width);
+    side.setAttribute("height", height);
+    side.setAttribute("rotation", { x: 0, y: -90, z: 0 });
+    side.setAttribute("class", "collidable");
+    side.setAttribute("part", "wall");
+    side.setAttribute("material", {
+      src: this.data.buildingTextures[texture],
+      repeat: { x: width / 10, y: height / 10 }
+    });
+    this.el.appendChild(side);
+
+    side = document.createElement("a-plane");
+    side.setAttribute("position", { x: x + depth / 2, y: height / 2, z: z });
+    side.setAttribute("width", width);
+    side.setAttribute("height", height);
+    side.setAttribute("rotation", { x: 0, y: 90, z: 0 });
+    side.setAttribute("class", "collidable");
+    side.setAttribute("part", "wall");
+    side.setAttribute("material", {
+      src: this.data.buildingTextures[texture],
+      repeat: { x: width / 10, y: height / 10 }
+    });
+    this.el.appendChild(side);
 
     let roof = document.createElement("a-plane");
-    roof.setAttribute("position", { x: x, y: height + 0.1, z: z });
+    roof.setAttribute("position", { x: x, y: height, z: z });
     roof.setAttribute("width", width - 0.2);
     roof.setAttribute("height", depth - 0.2);
     roof.setAttribute("rotation", { x: -90, y: 0, z: 0 });
+    roof.setAttribute("class", "collidable");
+    roof.setAttribute("part", "roof");
     roof.setAttribute("color", this.data.buildingColors[texture]);
     this.el.appendChild(roof);
   },

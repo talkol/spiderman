@@ -170,16 +170,25 @@ AFRAME.registerComponent("player", {
       rigLocalPosition.addScaledVector(this.velocity, timeDeltaSec);
     } else {
       // collision with environment
-      this.velocity.reflect(velocityRaycaster.intersections[0].face.normal);
-      this.velocity.multiplyScalar(this.data.bounce);
-      // for keep away from walls
-      this.lastCollisionWorldPosition = velocityRaycaster.intersections[0].point;
-      this.lastCollisionPlane.setFromNormalAndCoplanarPoint(
-        velocityRaycaster.intersections[0].face.normal,
-        velocityRaycaster.intersections[0].point
-      );
+      if(velocityRaycaster.intersections[0].object.el['part'][0] === 'wall') {
+        this.velocity.reflect(velocityRaycaster.intersections[0].face.normal);
+        this.velocity.multiplyScalar(this.data.bounce);
+        // for keep away from walls
+        this.lastCollisionWorldPosition = velocityRaycaster.intersections[0].point;
+        this.lastCollisionPlane.setFromNormalAndCoplanarPoint(
+          velocityRaycaster.intersections[0].face.normal,
+          velocityRaycaster.intersections[0].point
+        );
+        this.playCollideSound("hit-wall", this.velocity.length());
+      } else {
+        if (this.velocity.y < -2) {
+          this.playCollideSound("hit-wall", this.velocity.length());
+        }
+        this.velocity.reflect(new THREE.Vector3(0, 1, 0));
+        this.velocity.multiplyScalar(this.data.bounce);
+      }
+
       // sound hit wall
-      this.playCollideSound("hit-wall", this.velocity.length());
       this.scoreValue = 0;
       this.updateScore();
     }
