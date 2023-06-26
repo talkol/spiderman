@@ -68,6 +68,7 @@ AFRAME.registerComponent("tile", {
     side.setAttribute("part", "wall");
     side.setAttribute("material", {
       src: this.data.buildingTextures[texture],
+      shader: "flat",
       repeat: { x: width / 10, y: height / 10 }
     });
     this.el.appendChild(side);
@@ -81,6 +82,7 @@ AFRAME.registerComponent("tile", {
     side.setAttribute("part", "wall");
     side.setAttribute("material", {
       src: this.data.buildingTextures[texture],
+      shader: "flat",
       repeat: { x: width / 10, y: height / 10 }
     });
     this.el.appendChild(side);
@@ -94,6 +96,7 @@ AFRAME.registerComponent("tile", {
     side.setAttribute("part", "wall");
     side.setAttribute("material", {
       src: this.data.buildingTextures[texture],
+      shader: "flat",
       repeat: { x: width / 10, y: height / 10 }
     });
     this.el.appendChild(side);
@@ -107,6 +110,7 @@ AFRAME.registerComponent("tile", {
     side.setAttribute("part", "wall");
     side.setAttribute("material", {
       src: this.data.buildingTextures[texture],
+      shader: "flat",
       repeat: { x: width / 10, y: height / 10 }
     });
     this.el.appendChild(side);
@@ -118,7 +122,10 @@ AFRAME.registerComponent("tile", {
     roof.setAttribute("rotation", { x: -90, y: 0, z: 0 });
     roof.setAttribute("class", "collidable");
     roof.setAttribute("part", "roof");
-    roof.setAttribute("color", this.data.buildingColors[texture]);
+    roof.setAttribute("color", {
+      src: this.data.buildingColors[texture],
+      shader: "flat"
+    });
     this.el.appendChild(roof);
   },
 
@@ -141,174 +148,6 @@ AFRAME.registerComponent("tile", {
     plane.setAttribute("height", 150);
     plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
     plane.setAttribute("color", "#" + Math.round(0xffffff * this.nextRand()).toString(16));
-    this.el.appendChild(plane);
-  },
-  */
-
-  /*
-  addBuilding: function(width, depth, height, x, z) {
-    let texture = this.nextRandElement(this.data.buildingTextures);
-    let bottomHeight = 0.3;
-    
-    // four sides
-    
-    let plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x, y: bottomHeight + height / 2, z: z + depth / 2 });
-    plane.setAttribute("width", width);
-    plane.setAttribute("height", height);
-    plane.setAttribute("rotation", { x: 0, y: 0, z: 0 });
-    plane.setAttribute("class", "collidable");
-    plane.setAttribute("material", {
-      src: this.data.buildingTextures[texture],
-      repeat: { x: width / 10, y: height / 10 }
-    });
-    this.el.appendChild(plane);
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x, y: bottomHeight + height / 2, z: z - depth / 2 });
-    plane.setAttribute("width", width);
-    plane.setAttribute("height", height);
-    plane.setAttribute("rotation", { x: 0, y: 180, z: 0 });
-    plane.setAttribute("class", "collidable");
-    plane.setAttribute("material", {
-      src: this.data.buildingTextures[texture],
-      repeat: { x: width / 10, y: height / 10 }
-    });
-    this.el.appendChild(plane);
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x + width / 2, y: bottomHeight + height / 2, z: z });
-    plane.setAttribute("width", depth);
-    plane.setAttribute("height", height);
-    plane.setAttribute("rotation", { x: 0, y: 90, z: 0 });
-    plane.setAttribute("class", "collidable");
-    plane.setAttribute("material", {
-      src: this.data.buildingTextures[texture],
-      repeat: { x: depth / 10, y: height / 10 }
-    });
-    this.el.appendChild(plane);
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x - width / 2, y: bottomHeight + height / 2, z: z });
-    plane.setAttribute("width", depth);
-    plane.setAttribute("height", height);
-    plane.setAttribute("rotation", { x: 0, y: 270, z: 0 });
-    plane.setAttribute("class", "collidable");
-    plane.setAttribute("material", {
-      src: this.data.buildingTextures[texture],
-      repeat: { x: depth / 10, y: height / 10 }
-    });
-    this.el.appendChild(plane);
-    
-    // roof
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x, y: bottomHeight + height, z: z });
-    plane.setAttribute("width", width);
-    plane.setAttribute("height", depth);
-    plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
-    plane.setAttribute("class", "collidable");
-    plane.setAttribute("color", this.data.buildingColors[texture]);
-    plane.setAttribute("material", {
-      shader: "flat"
-    });
-    this.el.appendChild(plane);
-    
-    // bottom sides
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x, y: bottomHeight / 2, z: z + depth / 2 });
-    plane.setAttribute("width", width);
-    plane.setAttribute("height", bottomHeight);
-    plane.setAttribute("rotation", { x: 0, y: 0, z: 0 });
-    plane.setAttribute("color", this.data.buildingColors[texture]);
-    plane.setAttribute("material", {
-      shader: "flat"
-    });
-    this.el.appendChild(plane);
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x, y: bottomHeight / 2, z: z - depth / 2 });
-    plane.setAttribute("width", width);
-    plane.setAttribute("height", bottomHeight);
-    plane.setAttribute("rotation", { x: 0, y: 180, z: 0 });
-    plane.setAttribute("color", this.data.buildingColors[texture]);
-    this.el.appendChild(plane);
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x + width / 2, y: bottomHeight / 2, z: z });
-    plane.setAttribute("width", depth);
-    plane.setAttribute("height", bottomHeight);
-    plane.setAttribute("rotation", { x: 0, y: 90, z: 0 });
-    plane.setAttribute("color", this.data.buildingColors[texture]);
-    this.el.appendChild(plane);
-    
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: x - width / 2, y: bottomHeight / 2, z: z });
-    plane.setAttribute("width", depth);
-    plane.setAttribute("height", bottomHeight);
-    plane.setAttribute("rotation", { x: 0, y: 270, z: 0 });
-    plane.setAttribute("color", this.data.buildingColors[texture]);
-    this.el.appendChild(plane);
-  },
-  */
-
-  /*
-  addGround1: function() {
-    let plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: 0, y: 0, z: 73.25 });
-    plane.setAttribute("width", 150);
-    plane.setAttribute("height", 3.5);
-    plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
-    plane.setAttribute("color", "#333");
-    plane.setAttribute("material", {
-      shader: "flat"
-    });
-    this.el.appendChild(plane);
-
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: 0, y: 0, z: -73.25 });
-    plane.setAttribute("width", 150);
-    plane.setAttribute("height", 3.5);
-    plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
-    plane.setAttribute("color", "#333");
-    plane.setAttribute("material", {
-      shader: "flat"
-    });
-    this.el.appendChild(plane);
-
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: 73.25, y: 0, z: 0 });
-    plane.setAttribute("width", 3.5);
-    plane.setAttribute("height", 143);
-    plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
-    plane.setAttribute("color", "#333");
-    plane.setAttribute("material", {
-      shader: "flat"
-    });
-    this.el.appendChild(plane);
-
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: -73.25, y: 0, z: 0 });
-    plane.setAttribute("width", 3.5);
-    plane.setAttribute("height", 143);
-    plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
-    plane.setAttribute("color", "#333");
-    plane.setAttribute("material", {
-      shader: "flat"
-    });
-    this.el.appendChild(plane);
-
-    plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: 0, y: 0, z: 0 });
-    plane.setAttribute("width", 143);
-    plane.setAttribute("height", 143);
-    plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
-    plane.setAttribute("material", {
-      src: this.data.groundTextures[0],
-      repeat: { x: 40, y: 50 },
-      shader: "flat"
-    });
     this.el.appendChild(plane);
   },
   */
