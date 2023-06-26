@@ -159,4 +159,3 @@ AFRAME.components['vr-mode-ui'].Component.prototype.toggleEnterARButtonIfNeeded 
   }
   c.toggleEnterARButtonIfNeeded();
 };
-

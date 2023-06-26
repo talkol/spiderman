@@ -29,6 +29,12 @@ AFRAME.registerComponent("map", {
     model.setAttribute("scale", "1.5 1.5 1.5");
     this.crystal.appendChild(model);
     this.el.appendChild(this.crystal);
+
+    document.querySelector('a-scene').addEventListener('enter-vr', function () {
+      if (this.xrSession.updateTargetFrameRate) {
+        this.xrSession.updateTargetFrameRate(72);
+      }
+    });
   },
 
   play: function() {
