@@ -147,6 +147,9 @@ AFRAME.registerComponent("hand", {
 
   onControllerConnected: function() {
     this.el.object3D.visible = true;
+    if (this.el.components["tracked-controls-webxr"].data.space && this.el.components["tracked-controls-webxr"].data.space === "gripSpace") {
+      this.el.components["tracked-controls-webxr"].data.space = "targetRaySpace";
+    }
   },
 
   onControllerDisconnected: function() {

@@ -122,10 +122,7 @@ AFRAME.registerComponent("tile", {
     roof.setAttribute("rotation", { x: -90, y: 0, z: 0 });
     roof.setAttribute("class", "collidable");
     roof.setAttribute("part", "roof");
-    roof.setAttribute("color", {
-      src: this.data.buildingColors[texture],
-      shader: "flat"
-    });
+    roof.setAttribute("color", this.data.buildingColors[texture]);
     this.el.appendChild(roof);
   },
 
