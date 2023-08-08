@@ -1,4 +1,7 @@
 let TILE_COUNTER = 1;
+let treebuildingTextures = [];
+let roadTexture = undefined;
+let groundTexture = undefined;
 
 AFRAME.registerComponent("tile", {
   schema: {
@@ -9,16 +12,40 @@ AFRAME.registerComponent("tile", {
     groundTextures: { type: "array", default: [] },
     groundColors: { type: "array", default: [] },
     roadTextures: { type: "array", default: [] },
-    roadColors: { type: "array", default: [] }
+    roadColors: { type: "array", default: [] },
+  },
+
+  createThreeTexture: function(textureLoader, id, repeatx, repeaty) {
+    let src = document.querySelector(id).src;
+    let texture = textureLoader.load(src);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set( repeatx, repeaty );
+
+    return texture;
   },
 
   init: function() {
+    if (treebuildingTextures.length === 0) {
+      let textureLoader = new THREE.TextureLoader();
+      roadTexture = this.createThreeTexture(textureLoader, this.data.roadTextures[0], 60, 60);
+      roadTexture.depthWrite = false; 
+      groundTexture = this.createThreeTexture(textureLoader, this.data.groundTextures[0], 44, 55);
+      groundTexture.depthWrite = false; 
+
+      for (const item of this.data.buildingTextures) {
+        treebuildingTextures.push(this.createThreeTexture(textureLoader, item, 20, 20));
+      }
+    }
+
     this.randState = TILE_COUNTER++;
 
     this.addGround1();
 
     let buildings = [this.addBuildings1.bind(this), this.addBuildings2.bind(this)];
     buildings[this.nextRandElement(buildings)]();
+
+    this.__proto__.play = function emitChange () {};
   },
 
   nextRand: function() {
@@ -37,10 +64,11 @@ AFRAME.registerComponent("tile", {
     plane.setAttribute("height", this.data.tileSize);
     plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
     plane.setAttribute("material", {
-      src: this.data.roadTextures[0],
+      src: roadTexture,
       repeat: { x: 60, y: 60 },
       shader: "flat",
-      depthWrite: false
+      depthWrite: false,
+      side: "front"
     });
     this.el.appendChild(plane);
 
@@ -51,9 +79,10 @@ AFRAME.registerComponent("tile", {
     plane.setAttribute("depth", this.data.tileSize - 11);
     plane.setAttribute("height", this.data.sidewalkHeight);
     plane.setAttribute("material", {
-      src: this.data.groundTextures[0],
+      src: groundTexture,
       repeat: { x: 44, y: 55 },
-      depthWrite: false
+      depthWrite: false,
+      side: "front"
     });
     this.el.appendChild(plane);
   },
@@ -71,10 +100,13 @@ AFRAME.registerComponent("tile", {
     box.setAttribute("open-ended", true);
     box.setAttribute("class", "collidable");
     box.setAttribute("part", "wall");
+    let clonedTexture = treebuildingTextures[texture].clone();
+    clonedTexture.repeat = { x: width / 10 * Math.sqrt(2), y: height / 10 * Math.sqrt(2) };
     box.setAttribute("material", {
-      src: this.data.buildingTextures[texture],
+      src: clonedTexture,
       shader: "flat",
-      repeat: { x: width / 10 * Math.sqrt(2), y: height / 10 * Math.sqrt(2) }
+      repeat: { x: width / 10 * Math.sqrt(2), y: height / 10 * Math.sqrt(2) },
+      side: "front"
     });
     this.el.appendChild(box);
 

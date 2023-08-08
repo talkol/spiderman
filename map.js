@@ -35,6 +35,8 @@ AFRAME.registerComponent("map", {
         this.xrSession.updateTargetFrameRate(72);
       }
     });
+
+    this.throttledEmitComponentChanged = function emitChange () {};
   },
 
   play: function() {
@@ -173,12 +175,16 @@ AFRAME.registerComponent("map", {
   addTile: function(x, y) {
     let tile = this.el.components.pool.requestEntity();
     tile.setAttribute("id", this.getTileId(x, y));
+    if (tile.components["position"] !== undefined) {
+      tile.components["position"].throttledEmitComponentChanged = function emitChange () {};
+    }
+
     tile.setAttribute("position", {
       x: this.tileOffset + x * this.data.tileSize,
       y: 0,
       z: this.tileOffset + y * this.data.tileSize
     });
-    tile.play();
+
     return tile;
   },
 
