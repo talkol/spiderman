@@ -1,20 +1,16 @@
-# Spider-Man VR Experience
+# City Sling VR Experience
 
-Virtual Reality experience based on WebVR, works best with a VR headset like Oculus Quest.
-
-<img src="assets/preview.gif">
+Virtual Reality experience based on WebXR.
 
 ### Instructions
 
-1. Use the headset browser to visit the site - https://spiderman.webvr.link
+1. Use the headset browser to visit the site - https://citysling.arvr.social
 2. Click on the "VR" button on the bottom right to enter VR mode
 3. Enjoy
 
 ### Unofficial, fan-made and open source
 
-This project is made by a fan for educational purposes with fair use in mind. It is open source and non-profit (not even ads). Its goal is to explore the physics behind Spider-Man's web swinging and allow fans to experience what this ability feels like in VR.
-
-One of my favorite games this year was Spider-Man PS4 where swinging around the city feels almost as good as Spider-Man 2 on the PS2. Hopefully this experience would inspire Marvel to make more official VR experiences for this mechanic.
+This project is made by a fan for educational purposes with fair use in mind. It is open source and non-profit (not even ads). 
 
 ### Tips and tricks
 
@@ -26,11 +22,11 @@ The crystal challenge: Crystals appear near intersections on the main roads. To 
 
 ### Credits
 
+The original game was made by [talkol](https://github.com/talkol). This version renames it to City Sling VR, fixes some gameplay mechanics and changes out some assets.
+
 Game mechanics implemented by [talkol](https://github.com/talkol)
 
 Built with [A-Frame](https://aframe.io) to demonstrate the power of WebVR (who knew JS can do this much!)
-
-Background music is a playlist of Spider-Man related tracks I found on [SoundCloud](https://soundcloud.com/)
 
 The crystal 3D model is an optimized version of [Crystal Kyber](https://sketchfab.com/3d-models/crystal-kyber-1d769339a8cc45fda2ba6b31ce91160f) by [Ian Diaz](https://sketchfab.com/Dyckzu) licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (source assets are compressed)
 
@@ -40,4 +36,6 @@ Sound effects came from [ZapSplat](https://zapsplat.com/)
 
 The file hand.js is based on a component from [A-Frame](https://github.com/aframevr/aframe) which is release under the [MIT license](https://github.com/aframevr/aframe/blob/master/LICENSE)
 
-And lastly, thanks to [@Galadirith](https://github.com/Galadirith) who [helped](https://github.com/talkol/spiderman/issues/2) iron out everything missing from the credits
+Thanks to [@Galadirith](https://github.com/Galadirith) who helped iron out everything missing from the credits
+
+Also, thanks to [Felix](https://github.com/felixtrz) for updating the assets.

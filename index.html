@@ -2,17 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="keywords" content="WebXR, AR, VR, Spiderman VR" />
-    <title>Spider-Man VR Experience</title>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQY6VF1PKX"></script>
+    <meta name="keywords" content="WebXR, VR, City Sling VR" />
+    <title>City Sling VR Experience</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NG82SD287B"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
     
-      gtag('config', 'G-YQY6VF1PKX');
+      gtag('config', 'G-NG82SD287B');
     </script>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/diarmidmackenzie/instanced-mesh@v0.6.0/src/instanced-mesh.min.js"></script>
     <script src="hand.js"></script>
     <script src="tile.js"></script>
     <script src="map.js"></script>
@@ -22,7 +23,7 @@
     <script src="radio.js"></script>
   </head>
 
-  <body style="position: relative;">
+  <body style="position: relative;">`
     <a-scene
       renderer="highRefreshRate: false; colorManagement: true;"
       fog="type: linear; color: #eafaff; far: 500;"
@@ -144,6 +145,7 @@
           id="sound-crystal"
           src="assets/crystal.mp3"
         ></audio>
+        <a-plane id="groundPlane" width="160" height="160" color="red" instanced-mesh="capacity:1000;positioning: world;"></a-plane>
       </a-assets>
 
       <a-entity light="type:ambient; color:#e8e8e8"></a-entity>
@@ -176,7 +178,7 @@
         grip button for sharper turns.
       </p>
       <p style="color: white;">Click the VR button on the bottom right to start! Browser with WebXR support required.</p>
-      <p style="font-size: 12px;">Unofficial, fan-made, open source - <a href="https://github.com/talkol/spiderman" style="font-size: 12px; color: black;">https://github.com/talkol/spiderman</a></p>
+      <p style="font-size: 12px;">Unofficial, fan-made, open source - <a href="https://github.com/talkol/citysling" style="font-size: 12px; color: black;">https://github.com/talkol/citysling</a></p>
       <p style="font-size: 12px;">Updated by  - <a href="https://github.com/cabanier" style="font-size: 12px; color: black;">Rik Cabanier</a></p>
     </div>
   </body>

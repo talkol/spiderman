@@ -2,6 +2,7 @@ let TILE_COUNTER = 1;
 let treebuildingTextures = [];
 let roadTexture = undefined;
 let groundTexture = undefined;
+let groundPlane = undefined;
 
 AFRAME.registerComponent("tile", {
   schema: {
@@ -36,14 +37,28 @@ AFRAME.registerComponent("tile", {
       for (const item of this.data.buildingTextures) {
         treebuildingTextures.push(this.createThreeTexture(textureLoader, item, 20, 20));
       }
+/*
+      groundPlane = document.createElement("a-plane");
+      //plane.setAttribute("position", { x: 0, y: -1 * this.data.sidewalkHeight, z: 0 });
+      groundPlane.setAttribute("id", groundPlane);
+      groundPlane.setAttribute("width", this.data.tileSize);
+      groundPlane.setAttribute("height", this.data.tileSize);
+      groundPlane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
+      groundPlane.setAttribute("material", {
+        src: roadTexture,
+        repeat: { x: 60, y: 60 },
+        shader: "flat",
+        depthWrite: false,
+        side: "front"
+      });
+      groundPlane.setAttribute("instanced-mesh", "");
+      this.el.appendChild(groundPlane);
+      */
     }
 
     this.randState = TILE_COUNTER++;
 
     this.addGround1();
-
-    let buildings = [this.addBuildings1.bind(this), this.addBuildings2.bind(this)];
-    buildings[this.nextRandElement(buildings)]();
 
     this.__proto__.play = function emitChange () {};
   },
@@ -58,6 +73,7 @@ AFRAME.registerComponent("tile", {
   },
 
   addGround1: function() {
+    /*
     let plane = document.createElement("a-plane");
     plane.setAttribute("position", { x: 0, y: -1 * this.data.sidewalkHeight, z: 0 });
     plane.setAttribute("width", this.data.tileSize);
@@ -69,7 +85,11 @@ AFRAME.registerComponent("tile", {
       shader: "flat",
       depthWrite: false,
       side: "front"
-    });
+    });*/
+
+    let plane = document.createElement("a-entity");
+    plane.setAttribute("position", { x: 0, y: -1 * this.data.sidewalkHeight, z: 0 });
+    plane.setAttribute("instanced-mesh-member", "mesh:#groundPlane");
     this.el.appendChild(plane);
 
     // sidewalk
@@ -121,26 +141,10 @@ AFRAME.registerComponent("tile", {
     this.el.appendChild(roof);
   },
 
-  addBuildings1: function() {
-    this.addBuilding(90, 90, 50 + 150 * this.nextRand(), 20 * this.nextRand() - 10, 20 * this.nextRand() - 10);
-  },
-
   addBuildings2: function() {
     this.addBuilding(50, 50, 40 + 100 * this.nextRand(), -35 - this.nextRand() * 8, -35 - this.nextRand() * 8);
     this.addBuilding(50, 50, 60 + 90 * this.nextRand(), 35 + this.nextRand() * 8, -35 - this.nextRand() * 8);
     this.addBuilding(50, 50, 40 + 180 * this.nextRand(), -35 - this.nextRand() * 8, 35 + this.nextRand() * 8);
     this.addBuilding(50, 50, 50 + 70 * this.nextRand(), 35 + this.nextRand() * 8, 35 + this.nextRand() * 8);
   }
-
-  /*
-  addGroundDebug: function() {
-    let plane = document.createElement("a-plane");
-    plane.setAttribute("position", { x: 0, y: 0, z: 0 });
-    plane.setAttribute("width", 150);
-    plane.setAttribute("height", 150);
-    plane.setAttribute("rotation", { x: -90, y: 0, z: 0 });
-    plane.setAttribute("color", "#" + Math.round(0xffffff * this.nextRand()).toString(16));
-    this.el.appendChild(plane);
-  },
-  */
 });
