@@ -1,6 +1,7 @@
 The MIT License
 
 Copyright © 2019-2020 Tal Kol.
+Copyright © 2023 Rik Cabanier.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

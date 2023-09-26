@@ -4,7 +4,7 @@ Virtual Reality experience based on WebXR.
 
 ### Instructions
 
-1. Use the headset browser to visit the site - https://citysling.arvr.social
+1. Use the headset browser to visit the site - https://cityslingvr.arvr.social
 2. Click on the "VR" button on the bottom right to enter VR mode
 3. Enjoy
 
