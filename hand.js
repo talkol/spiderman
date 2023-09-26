@@ -4,7 +4,7 @@
 
 var MODEL_URLS = {
   left: "assets/leftHand.glb",
-  right: "assets/rightHand.glb"
+  right: "assets/rightHand.glb",
 };
 
 // Poses.
@@ -19,7 +19,7 @@ var ANIMATIONS = {
   // hold: trigger active, grip inactive.
   hold: "Web",
   // thumbUp: grip active, trigger active, trackpad surface inactive.
-  thumbUp: "Grip"
+  thumbUp: "Grip",
 };
 
 // Map animation to public events for the API.
@@ -46,7 +46,7 @@ EVENTS[ANIMATIONS.point] = "pointing";
 AFRAME.registerComponent("hand", {
   schema: { default: "left" },
 
-  init: function() {
+  init: function () {
     var self = this;
     var el = this.el;
     // Current pose.
@@ -57,85 +57,88 @@ AFRAME.registerComponent("hand", {
     this.loader = new THREE.GLTFLoader();
     this.loader.setCrossOrigin("anonymous");
 
-    this.onGripDown = function(evt) {
+    this.onGripDown = function (evt) {
       self.handleButton("grip", "down", evt.detail);
     };
-    this.onGripUp = function(evt) {
+    this.onGripUp = function (evt) {
       self.handleButton("grip", "up", evt.detail);
     };
-    this.onTrackpadDown = function(evt) {
+    this.onTrackpadDown = function (evt) {
       self.handleButton("trackpad", "down", evt.detail);
     };
-    this.onTrackpadUp = function(evt) {
+    this.onTrackpadUp = function (evt) {
       self.handleButton("trackpad", "up", evt.detail);
     };
-    this.onTrackpadChanged = function(evt) {
+    this.onTrackpadChanged = function (evt) {
       self.handleButton("trackpad", "changed", evt.detail);
     };
-    this.onTrackpadTouchEnd = function(evt) {
+    this.onTrackpadTouchEnd = function (evt) {
       self.handleButton("trackpad", "touchend", evt.detail);
     };
-    this.onTriggerDown = function(evt) {
+    this.onTriggerDown = function (evt) {
       self.handleButton("trigger", "down", evt.detail);
     };
-    this.onTriggerUp = function(evt) {
+    this.onTriggerUp = function (evt) {
       self.handleButton("trigger", "up", evt.detail);
     };
-    this.onTriggerChanged = function(evt) {
+    this.onTriggerChanged = function (evt) {
       self.handleButton("trigger", "changed", evt.detail);
     };
-    this.onTriggerTouchEnd = function(evt) {
+    this.onTriggerTouchEnd = function (evt) {
       self.handleButton("trigger", "touchend", evt.detail);
     };
-    this.onGripChanged = function(evt) {
+    this.onGripChanged = function (evt) {
       self.handleButton("grip", "changed", evt.detail);
     };
-    this.onGripTouchEnd = function(evt) {
+    this.onGripTouchEnd = function (evt) {
       self.handleButton("grip", "touchend", evt.detail);
     };
-    this.onThumbstickDown = function(evt) {
+    this.onThumbstickDown = function (evt) {
       self.handleButton("thumbstick", "down", evt.detail);
     };
-    this.onThumbstickUp = function(evt) {
+    this.onThumbstickUp = function (evt) {
       self.handleButton("thumbstick", "up", evt.detail);
     };
-    this.onAorXChanged = function(evt) {
+    this.onAorXChanged = function (evt) {
       self.handleButton("AorX", "changed", evt.detail);
     };
-    this.onAorXTouchEnd = function(evt) {
+    this.onAorXTouchEnd = function (evt) {
       self.handleButton("AorX", "touchend", evt.detail);
     };
-    this.onBorYChanged = function(evt) {
+    this.onBorYChanged = function (evt) {
       self.handleButton("BorY", "changed", evt.detail);
     };
-    this.onBorYTouchEnd = function(evt) {
+    this.onBorYTouchEnd = function (evt) {
       self.handleButton("BorY", "touchend", evt.detail);
     };
-    this.onSurfaceChanged = function(evt) {
+    this.onSurfaceChanged = function (evt) {
       self.handleButton("surface", "changed", evt.detail);
     };
-    this.onSurfaceTouchEnd = function(evt) {
+    this.onSurfaceTouchEnd = function (evt) {
       self.handleButton("surface", "touchend", evt.detail);
     };
     this.onControllerConnected = this.onControllerConnected.bind(this);
     this.onControllerDisconnected = this.onControllerDisconnected.bind(this);
 
     el.addEventListener("controllerconnected", this.onControllerConnected);
-    el.addEventListener("controllerdisconnected", this.onControllerDisconnected);
+    el.addEventListener(
+      "controllerdisconnected",
+      this.onControllerDisconnected
+    );
 
     // Hidden by default.
     el.object3D.visible = false;
   },
 
-  play: function() {
+  play: function () {
     this.addEventListeners();
   },
 
-  pause: function() {
+  pause: function () {
     this.removeEventListeners();
   },
 
-  tick: function(time, delta) {
+  tick: function (time, delta) {
     var mesh = this.el.getObject3D("mesh");
 
     if (!mesh || !mesh.mixer) {
@@ -145,18 +148,18 @@ AFRAME.registerComponent("hand", {
     mesh.mixer.update(delta / 1000);
   },
 
-  onControllerConnected: function() {
+  onControllerConnected: function () {
     this.el.object3D.visible = true;
     if (this.el.components["tracked-controls-webxr"].data.space && this.el.components["tracked-controls-webxr"].data.space === "gripSpace") {
       this.el.components["tracked-controls-webxr"].data.space = "targetRaySpace";
     }
   },
 
-  onControllerDisconnected: function() {
+  onControllerDisconnected: function () {
     this.el.object3D.visible = false;
   },
 
-  addEventListeners: function() {
+  addEventListeners: function () {
     var el = this.el;
     el.addEventListener("gripdown", this.onGripDown);
     el.addEventListener("gripup", this.onGripUp);
@@ -184,7 +187,7 @@ AFRAME.registerComponent("hand", {
     el.addEventListener("surfacetouchend", this.onSurfaceTouchEnd);
   },
 
-  removeEventListeners: function() {
+  removeEventListeners: function () {
     var el = this.el;
     el.removeEventListener("gripdown", this.onGripDown);
     el.removeEventListener("gripup", this.onGripUp);
@@ -216,7 +219,7 @@ AFRAME.registerComponent("hand", {
    * Update handler. More like the `init` handler since the only property is the hand, and
    * that won't be changing much.
    */
-  update: function(previousHand) {
+  update: function (previousHand) {
     var controlConfiguration;
     var el = this.el;
     var hand = this.data;
@@ -226,12 +229,12 @@ AFRAME.registerComponent("hand", {
     controlConfiguration = {
       hand: hand,
       model: false,
-      orientationOffset: { x: 0, y: 0, z: hand === "left" ? 90 : -90 }
+      orientationOffset: { x: 0, y: 0, z: hand === "left" ? 90 : -90 },
     };
 
     // Set model.
     if (hand !== previousHand) {
-      this.loader.load(MODEL_URLS[hand], function(gltf) {
+      this.loader.load(MODEL_URLS[hand], function (gltf) {
         var mesh = gltf.scene.children[0];
         mesh.mixer = new THREE.AnimationMixer(mesh);
         self.clips = gltf.animations;
@@ -245,7 +248,7 @@ AFRAME.registerComponent("hand", {
     }
   },
 
-  remove: function() {
+  remove: function () {
     this.el.removeObject3D("mesh");
   },
 
@@ -260,7 +263,7 @@ AFRAME.registerComponent("hand", {
    * @param {string} button - Name of the button.
    * @param {string} evt - Type of event for the button (i.e., down/up/touchstart/touchend).
    */
-  handleButton: function(button, evt, detail) {
+  handleButton: function (button, evt, detail) {
     var lastGesture;
     var isPressed = evt === "down";
     var isTouched = evt === "changed" && detail.value > 0;
@@ -298,13 +301,17 @@ AFRAME.registerComponent("hand", {
   /**
    * Determine which pose hand should be in considering active and touched buttons.
    */
-  determineGesture: function() {
+  determineGesture: function () {
     var gesture;
     var isGripActive = this.pressedButtons["grip"];
-    var isSurfaceActive = this.pressedButtons["surface"] || this.touchedButtons["surface"];
-    var isTrackpadActive = this.pressedButtons["trackpad"] || this.touchedButtons["trackpad"];
-    var isTriggerActive = this.pressedButtons["trigger"] || this.touchedButtons["trigger"];
-    var isABXYActive = this.touchedButtons["AorX"] || this.touchedButtons["BorY"];
+    var isSurfaceActive =
+      this.pressedButtons["surface"] || this.touchedButtons["surface"];
+    var isTrackpadActive =
+      this.pressedButtons["trackpad"] || this.touchedButtons["trackpad"];
+    var isTriggerActive =
+      this.pressedButtons["trigger"] || this.touchedButtons["trigger"];
+    var isABXYActive =
+      this.touchedButtons["AorX"] || this.touchedButtons["BorY"];
     var isVive = isViveController(this.el.components["tracked-controls"]);
 
     // Works well with Oculus Touch and Windows Motion Controls, but Vive needs tweaks.
@@ -319,7 +326,9 @@ AFRAME.registerComponent("hand", {
         if (isSurfaceActive || isABXYActive || isTrackpadActive) {
           gesture = isTriggerActive ? ANIMATIONS.fist : ANIMATIONS.point;
         } else {
-          gesture = isTriggerActive ? ANIMATIONS.thumbUp : ANIMATIONS.pointThumb;
+          gesture = isTriggerActive
+            ? ANIMATIONS.thumbUp
+            : ANIMATIONS.pointThumb;
         }
       } else if (isTriggerActive) {
         gesture = ANIMATIONS.hold;
@@ -332,7 +341,7 @@ AFRAME.registerComponent("hand", {
   /**
    * Play corresponding clip to a gesture
    */
-  getClip: function(gesture) {
+  getClip: function (gesture) {
     var clip;
     var i;
     for (i = 0; i < this.clips.length; i++) {
@@ -350,7 +359,7 @@ AFRAME.registerComponent("hand", {
    * @param {string} gesture - Which pose to animate to. If absent, then animate to open.
    * @param {string} lastGesture - Previous gesture, to reverse back to open if needed.
    */
-  animateGesture: function(gesture, lastGesture) {
+  animateGesture: function (gesture, lastGesture) {
     if (gesture) {
       this.playAnimation(gesture || ANIMATIONS.open, lastGesture, false);
       return;
@@ -363,7 +372,7 @@ AFRAME.registerComponent("hand", {
   /**
    * Emit `hand-controls`-specific events.
    */
-  emitGestureEvents: function(gesture, lastGesture) {
+  emitGestureEvents: function (gesture, lastGesture) {
     var el = this.el;
     var eventName;
 
@@ -391,7 +400,7 @@ AFRAME.registerComponent("hand", {
    * @param {string} lastGesture - Previous pose.
    * @param {boolean} reverse - Whether animation should play in reverse.
    */
-  playAnimation: function(gesture, lastGesture, reverse) {
+  playAnimation: function (gesture, lastGesture, reverse) {
     var clip;
     var fromAction;
     var mesh = this.el.getObject3D("mesh");
@@ -430,7 +439,7 @@ AFRAME.registerComponent("hand", {
     fromAction.play();
     toAction.play();
     fromAction.crossFadeTo(toAction, 0.15, true);
-  }
+  },
 });
 
 /**
@@ -464,6 +473,8 @@ function isViveController(trackedControls) {
   var isVive =
     controller &&
     ((controller.id && controller.id.indexOf("OpenVR ") === 0) ||
-      (controller.profiles && controller.profiles[0] && controller.profiles[0] === "htc-vive-controller-mv"));
+      (controller.profiles &&
+        controller.profiles[0] &&
+        controller.profiles[0] === "htc-vive-controller-mv"));
   return isVive;
 }

@@ -2,13 +2,18 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298280-1"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-155298280-1"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'UA-155298280-1');
+      gtag("config", "UA-155298280-1");
     </script>
     <meta charset="utf-8" />
     <meta name="keywords" content="WebXR, VR, City Sling VR" />
@@ -32,7 +37,7 @@
     <script src="radio.js"></script>
   </head>
 
-  <body style="position: relative;">`
+  <body style="position: relative">
     <a-scene
       renderer="highRefreshRate: false; colorManagement: true;"
       fog="type: linear; color: #eafaff; far: 500;"
@@ -101,16 +106,8 @@
           src="assets/s1b11.jpg"
           preload="auto"
         />
-        <img
-          id="style1-ground1-texture"
-          src="assets/s1g1.jpg"
-          preload="auto"
-        />
-        <img
-          id="style1-road1-texture"
-          src="assets/s1r1.jpg"
-          preload="auto"
-        />
+        <img id="style1-ground1-texture" src="assets/s1g1.jpg" preload="auto" />
+        <img id="style1-road1-texture" src="assets/s1r1.jpg" preload="auto" />
         <a-mixin
           id="tile"
           tile="
@@ -131,11 +128,7 @@
           src="assets/shoot-web.mp3"
           preload="auto"
         ></audio>
-        <audio
-          id="sound-no-web"
-          src="assets/no-web.mp3"
-          preload="auto"
-        ></audio>
+        <audio id="sound-no-web" src="assets/no-web.mp3" preload="auto"></audio>
         <audio
           id="sound-hit-wall"
           src="assets/hit-wall.mp3"
@@ -158,9 +151,16 @@
       </a-assets>
 
       <a-entity light="type:ambient; color:#e8e8e8"></a-entity>
-      <a-entity light="type: directional; color: #FFF; intensity: 0.6;" position="-0.5 1 1"></a-entity>
+      <a-entity
+        light="type: directional; color: #FFF; intensity: 0.6;"
+        position="-0.5 1 1"
+      ></a-entity>
 
-      <a-entity id="map" map="" pool="mixin: tile; size: 5; container: #map; dynamic: true;autoplay: false"></a-entity>
+      <a-entity
+        id="map"
+        map=""
+        pool="mixin: tile; size: 50; container: #map; dynamic: true;"
+      ></a-entity>
 
       <a-entity player="mass: 70" position="0 0 0"></a-entity>
 
@@ -173,26 +173,51 @@
     </a-scene>
 
     <div
-      style="z-index: 1; position: absolute;
-             top: 10%; left: 5%; bottom: 10%; right: 5%; 
-             padding: 1% 20% 1% 5%;
-             font-family: sans-serif,monospace; font-size: 20px; font-weight: 300;
-             background-repeat: no-repeat; background-color: #a40000; background-position-x: right; background-size: contain;
-             background-image: url(assets/background.png);"
+      style="
+        z-index: 1;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        bottom: 10%;
+        right: 5%;
+        padding: 1% 20% 1% 5%;
+        font-family: sans-serif, monospace;
+        font-size: 20px;
+        font-weight: 300;
+        background-repeat: no-repeat;
+        background-color: #5b5b5b;
+        background-position-x: right;
+        background-size: contain;
+        border-radius: 20px;
+      "
     >
-      <p><span style="color: white;">Movement:</span> Hold the triggers to shoot webs and zip through the city.</p>
-      <p><span style="color: white;">Challenge:</span> How many crystals can you collect without hitting walls?</p>
       <p>
-        <span style="color: white;">Advanced:</span> Hold thumbstick up/down before shooting to control length. Hold
-        grip button for sharper turns.
+        <span style="color: white">Movement:</span> Hold the triggers to shoot
+        grappling hooks and zip through the city.
       </p>
+      <p>
+        <span style="color: white">Challenge:</span> How many crystals can you
+        collect without hitting walls?
+      </p>
+      <p>
+        <span style="color: white">Advanced:</span> Hold thumbstick up/down
+        before shooting to control length. Hold grip button for sharper turns.
+      </p>
+      <p style="color: white">
+        Click the VR button on the bottom right to start! Browser with WebXR
+        support required.
+      </p>
+      <p style="font-size: 12px">
+        Unofficial, fan-made, open source -
+        <a
+          href="https://github.com/cabanier/cityslingvr"
+          style="font-size: 12px; color: black"
+          >https://github.com/cabanier/cityslingvr</a
+        >
+      </p>
+
       <p style="color: white;">Click the VR button on the bottom right to start! Browser with WebXR support required.</p>
-<<<<<<< HEAD
-      <p style="font-size: 12px;">Unofficial, fan-made, open source - <a href="https://github.com/talkol/citysling" style="font-size: 12px; color: black;">https://github.com/talkol/citysling</a></p>
       <p style="font-size: 12px;">Updated by  - <a href="https://github.com/cabanier" style="font-size: 12px; color: black;">Rik Cabanier</a></p>
-=======
-      <p style="font-size: 12px;">Unofficial, fan-made, open source - <a href="https://github.com/talkol/spiderman" style="font-size: 12px; color: black;">https://github.com/talkol/spiderman</a></p>
->>>>>>> Revert "add google analytics"
     </div>
   </body>
 </html>
