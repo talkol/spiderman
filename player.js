@@ -75,16 +75,40 @@ AFRAME.registerComponent("player", {
     this.lastCollisionPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0));
     this.scoreValue = 0;
 
+    this.isDesktopInput = function() {
+      return !AFRAME.utils.device.checkHeadsetConnected();
+    };
+
     // events
     window.addEventListener("keydown", function(evt) {
-      if (evt.keyCode === 32 && !evt.repeat) {
+      if (!self.isDesktopInput() || evt.repeat) {
+        return;
+      }
+      if (evt.keyCode === 32 || evt.keyCode === 13) {
+        evt.preventDefault();
         self.playWebSound(self.rightWeb.components.web.toggleWeb(self.camera, 1), "right");
       }
     });
     window.addEventListener("keyup", function(evt) {
-      if (evt.keyCode === 32) {
+      if (!self.isDesktopInput()) {
+        return;
+      }
+      if (evt.keyCode === 32 || evt.keyCode === 13) {
+        evt.preventDefault();
         self.rightWeb.components.web.toggleWeb(self.camera, 0);
       }
+    });
+    window.addEventListener("mousedown", function(evt) {
+      if (!self.isDesktopInput() || evt.button !== 0) {
+        return;
+      }
+      self.playWebSound(self.rightWeb.components.web.toggleWeb(self.camera, 1), "right");
+    });
+    window.addEventListener("mouseup", function(evt) {
+      if (!self.isDesktopInput() || evt.button !== 0) {
+        return;
+      }
+      self.rightWeb.components.web.toggleWeb(self.camera, 0);
     });
     this.rightHand.addEventListener("triggerchanged", function(evt) {
       self.playWebSound(self.rightWeb.components.web.toggleWeb(self.rightHand, evt.detail.value), "right");
